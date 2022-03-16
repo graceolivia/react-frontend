@@ -1,5 +1,4 @@
 import React from "react";
-import astronautsData from "./astronauts.json";
 import { useState, useEffect } from "react";
 
 function AstronautsTable() {
@@ -39,9 +38,6 @@ function AstronautsTable() {
             )
         }
     )
-  }
-
-
 
 
 
@@ -54,10 +50,15 @@ function AstronautsTable() {
             <th>Name</th>
           </tr>
         </thead>
-        <tbody>{/* DisplayData */ }</tbody>
+        <tbody>{ DisplayData }</tbody>
       </table>
     </div>
   );
+  }
+
+
+
+
 }
 
 export default AstronautsTable;
