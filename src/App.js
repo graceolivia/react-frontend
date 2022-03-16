@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react'
+import AstronautsTable from './AstronautsTable';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           Learn React on Grace's app
         </a>
       </header>
+      <AstronautsTable />
     </div>
   );
 }
