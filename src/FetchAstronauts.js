@@ -1,0 +1,47 @@
+import React from "react";
+import { useState, useEffect } from "react";
+
+function FetchAstronauts() {
+    const [error, setError] = useState(null);
+    const [astronauts, setAstronauts] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+  
+    useEffect(() => {
+      fetch("http://localhost:5000/react")
+        .then((response) => response.json())
+        .then(
+          (data) => {
+            setAstronauts(data);
+            setIsLoaded(true);
+          },
+          (error) => {
+          setError(error);
+          setIsLoaded(true)
+          }
+        );
+    }, []);
+
+      if (error) {
+    return <div>Error: {error.message}</div>;
+} else if (!isLoaded) {
+    return <div>Loading...</div>;
+} else {
+const DisplayData=astronauts.people.map(
+    (info)=>{
+        return(
+            <tr>
+                <td>{info.craft}</td>
+                <td>{info.name}</td>
+            </tr>
+        )
+    }
+)
+
+return (
+    <>
+    { DisplayData.firstChild }
+    </>)
+}
+    }
+
+export default FetchAstronauts;

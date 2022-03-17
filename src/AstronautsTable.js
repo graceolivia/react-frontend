@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-function AstronautsTable() {
+function AstronautsTable(FetchedData) {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,7 +27,6 @@ function AstronautsTable() {
 } else if (!isLoaded) {
     return <div>Loading...</div>;
 } else {
-    console.log(astronauts.people);
     const DisplayData=astronauts.people.map(
         (info)=>{
             return(
@@ -51,6 +50,7 @@ function AstronautsTable() {
           </tr>
         </thead>
         <tbody>{ DisplayData }</tbody>
+        {/* <tbody>{ FetchedData }</tbody> */}
       </table>
     </div>
   );
