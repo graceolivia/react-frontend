@@ -3,14 +3,8 @@ import App from './App';
 import React from 'react'
 
 
-test('renders table craft header', () => {
+test('renders loading screen', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Craft/i);
-  expect(linkElement).toBeInTheDocument();
-});
-
-test('renders table name header', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Name/i);
+  const linkElement = screen.getByText(/Loading/i);
   expect(linkElement).toBeInTheDocument();
 });
