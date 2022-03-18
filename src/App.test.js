@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 import React from 'react'
-import * as fetcher from "./fetchJson";
+import * as fetchJson from "./fetchJson";
+import AstronautsTable from './AstronautsTable';
 
 
 test('renders loading screen', () => {
@@ -11,10 +12,8 @@ test('renders loading screen', () => {
 });
 
 
-test('fetchJson gets called', () => {
-  // const json = "{\"people\": [{\"craft\": \"ISS\", \"name\": \"Mark Vande Hei\"}, {\"craft\": \"ISS\", \"name\": \"Pyotr Dubrov\"}, {\"craft\": \"ISS\", \"name\": \"Anton Shkaplerov\"}, {\"craft\": \"Shenzhou 13\", \"name\": \"Zhai Zhigang\"}, {\"craft\": \"Shenzhou 13\", \"name\": \"Wang Yaping\"}, {\"craft\": \"Shenzhou 13\", \"name\": \"Ye Guangfu\"}, {\"craft\": \"ISS\", \"name\": \"Raja Chari\"}, {\"craft\": \"ISS\", \"name\": \"Tom Marshburn\"}, {\"craft\": \"ISS\", \"name\": \"Kayla Barron\"}, {\"craft\": \"ISS\", \"name\": \"Matthias Maurer\"}], \"message\": \"success\", \"number\": 10}";
-              
-  const spy = jest.spyOn(fetcher, 'fetchJson');
+test('fetchJson gets called', () => {    
+  const spy = jest.spyOn(fetchJson, 'default');
   render(<App />);
   expect(spy).toHaveBeenCalled();
 });
