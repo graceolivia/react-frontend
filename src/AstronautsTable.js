@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import fetchJson from "./fetchJson";
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
@@ -7,9 +8,7 @@ function AstronautsTable() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // GET request using fetch inside useEffect React hook
-    fetch("http://localhost:5000/react")
-      .then((response) => response.json())
+      fetchJson()
       .then(
         (data) => {
           setAstronauts(data);
@@ -20,12 +19,27 @@ function AstronautsTable() {
         setIsLoaded(true)
         }
       );
-  }, []);
+  })
+
+//   useEffect(() => {
+//     fetch("http://localhost:5000/react")
+//       .then((response) => response.json())
+//       .then(
+//         (data) => {
+//           setAstronauts(data);
+//           setIsLoaded(true);
+//         },
+//         (error) => {
+//         setError(error);
+//         setIsLoaded(true)
+//         }
+//       );
+//   }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
 } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div>Loading, please wait...</div>;
 } else {
     console.log(astronauts.people);
     const DisplayData=astronauts.people.map(
