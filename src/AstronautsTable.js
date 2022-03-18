@@ -19,7 +19,7 @@ function AstronautsTable() {
         setIsLoaded(true)
         }
       );
-  })
+  }, []);
 
 //   useEffect(() => {
 //     fetch("http://localhost:5000/react")
