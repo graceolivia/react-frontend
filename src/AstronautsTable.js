@@ -21,21 +21,6 @@ function AstronautsTable() {
       );
   }, []);
 
-//   useEffect(() => {
-//     fetch("http://localhost:5000/react")
-//       .then((response) => response.json())
-//       .then(
-//         (data) => {
-//           setAstronauts(data);
-//           setIsLoaded(true);
-//         },
-//         (error) => {
-//         setError(error);
-//         setIsLoaded(true)
-//         }
-//       );
-//   }, []);
-
   if (error) {
     return <div>Error: {error.message}</div>;
 } else if (!isLoaded) {
@@ -53,8 +38,6 @@ function AstronautsTable() {
         }
     )
 
-
-
   return (
     <div>
       <table class="table table-striped">
@@ -69,9 +52,6 @@ function AstronautsTable() {
     </div>
   );
   }
-
-
-
 
 }
 

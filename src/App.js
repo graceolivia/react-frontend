@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Astronauts in Space Now</h1>
-        <img src="astronauts.webp" className="App-logo" alt="logo" />
+        <img src="astronauts.webp" className="Astronaut" alt="logo" />
         <AstronautsTable />
         <a
           className="App-link"
@@ -17,9 +17,8 @@ function App() {
         >
         </a>
       </header>
-      
     </div>
-  );
+  );s
 }
 
 export default App;

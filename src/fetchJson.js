@@ -1,5 +1,5 @@
-const fetchJson = () => {
-    return fetch("http://localhost:5000/react")
+const fetchJson = async () => {
+    return await fetch("http://localhost:5000/react")
         .then((response) => response.json())
         .then(
         (data) => {
