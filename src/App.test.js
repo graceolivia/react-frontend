@@ -23,26 +23,20 @@ test('renders graphic', () => {
   expect(isTableThere.length).toBe(1);
 });
 
-
-
 test('fetchJson gets called', () => {
   const spy = jest.spyOn(fetchJson, 'default');
   render(<App />);
   expect(spy).toHaveBeenCalled();
 });
 
+test('data from fetchJson is displayed', () => {
+  const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
+  const jsonJson = JSON.parse(json);
+  const jsonPromise = Promise.resolve(jsonJson)
+  const spy = jest.spyOn(fetchJson, 'default').mockResolvedValue(jsonPromise);
 
-
-// test('data from fetchJson is displayed', () => {
-//   const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
-//   const jsonJson = JSON.parse(json);
-//   const jsonPromise = Promise.resolve(jsonJson)
-//   const spy = jest.spyOn(fetchJson, 'default').mockResolvedValue(jsonPromise);
-
-//   render(<App />);
-//   expect(spy).toHaveBeenCalled();
-//   const calledText = screen.getByText(/Bowie/i);
-//   expect(calledText).toBeInTheDocument();
-// });
-
-
+  render(<App />);
+  expect(spy).toHaveBeenCalled();
+  const calledText = screen.getByText(/Bowie/i);
+  expect(calledText).toBeInTheDocument();
+});
