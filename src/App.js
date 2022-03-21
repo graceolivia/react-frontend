@@ -18,7 +18,7 @@ function App() {
         </a>
       </header>
     </div>
-  );s
+  );
 }
 
 export default App;
