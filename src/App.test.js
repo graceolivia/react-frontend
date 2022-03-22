@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import React from 'react'
 import * as fetchJson from "./fetchJson";
@@ -29,33 +29,32 @@ test('fetchJson gets called', () => {
   expect(spy).toHaveBeenCalled();
 });
 
-// test('data from fetchJson is displayed', () => {
-//   const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
-//   const jsonJson = JSON.parse(json);
-
-//   const jsonPromise = Promise.resolve(jsonJson);
-//   console.log(jsonPromise);
-//   const spy = jest.spyOn(fetchJson, 'default').mockResolvedValue(jsonPromise);
-//   //const spy = jest.spyOn(fetchJson, 'default');
-
-//   //mockResolvedValue(jsonJson);
-
-//   console.log(spy);
-//   render(<App />);
-//   expect(spy).toHaveBeenCalled();
-//   const calledText = screen.getByText(/Bowie/i);
-//   expect(calledText).toBeInTheDocument();
-// });
-
-test('data from fetchJson is displayed', () => {
-  beforeEach(async () => {
-      const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
+test('data from fetchJson is displayed', async () => {
+  const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
   const jsonJson = JSON.parse(json);
 
   const jsonPromise = Promise.resolve(jsonJson);
-  spy = await jest.spyOn(await fetchJson, 'default').mockResolvedValue(jsonPromise);
-  });
+  console.log(jsonPromise);
+  const spy = jest.spyOn(fetchJson, 'default').mockResolvedValue(jsonPromise);
 
-  const calledText = screen.getByText(/Bowie/i);
-  expect(calledText).toBeInTheDocument();
+  console.log(spy);
+  render(<App />);
+  expect(spy).toHaveBeenCalled();
+  await screen.findByText(/Bowie/i);
+  // await waitFor(() => {
+  //   expect(calledText).toBeInTheDocument();
+  // });
 });
+
+// test('data from fetchJson is displayed', () => {
+//   beforeEach(async () => {
+//       const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
+//   const jsonJson = JSON.parse(json);
+
+//   const jsonPromise = Promise.resolve(jsonJson);
+//   spy = await jest.spyOn(await fetchJson, 'default').mockResolvedValue(jsonPromise);
+//   });
+
+//   const calledText = screen.getByText(/Bowie/i);
+//   expect(calledText).toBeInTheDocument();
+// });
