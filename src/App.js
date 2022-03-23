@@ -1,6 +1,6 @@
-import './App.css';
-import React from 'react'
-import AstronautsTable from './AstronautsTable';
+import "./App.css";
+import React from "react";
+import AstronautsTable from "./AstronautsTable";
 
 function App() {
   return (
@@ -14,8 +14,7 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
-        </a>
+        ></a>
       </header>
     </div>
   );

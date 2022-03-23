@@ -2,8 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import React from 'react'
 import * as fetchJson from "./fetchJson";
-import AstronautsTable from './AstronautsTable';
-
 
 test('renders loading screen', () => {
   render(<App />);
@@ -17,12 +15,6 @@ test('renders graphic', () => {
   expect(isGraphicThere.length).toBe(1);
 });
 
-test('renders graphic', () => {
-  render(<App />);
-  const isTableThere = document.getElementsByTagName("header");
-  expect(isTableThere.length).toBe(1);
-});
-
 test('fetchJson gets called', () => {
   const spy = jest.spyOn(fetchJson, 'default');
   render(<App />);
@@ -30,17 +22,29 @@ test('fetchJson gets called', () => {
 });
 
 test('data from fetchJson is displayed', async () => {
-  const json = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
-  const jsonJson = JSON.parse(json);
-  const jsonPromise = Promise.resolve(jsonJson);
-  console.log(jsonPromise);
+  const jsonString = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
+  const jsonObject = JSON.parse(jsonString);
+  const jsonPromise = Promise.resolve(jsonObject);
   const spy = jest.spyOn(fetchJson, 'default').mockResolvedValue(jsonPromise);
 
-  console.log(spy);
   render(<App />);
   expect(spy).toHaveBeenCalled();
   const calledText = await screen.findByText(/Bowie/i);
   await waitFor(() => {
     expect(calledText).toBeInTheDocument();
+  });
+});
+
+test('table header is rendered', async () => {
+  const jsonString = "{\"people\": [{\"craft\": \"Rocketship\", \"name\": \"David Bowie\"}], \"message\": \"success\", \"number\": 1}"
+  const jsonObject = JSON.parse(jsonString);
+  const jsonPromise = Promise.resolve(jsonObject);
+  const spy = jest.spyOn(fetchJson, 'default').mockResolvedValue(jsonPromise);
+
+  render(<App />);
+  expect(spy).toHaveBeenCalled();
+  await waitFor(() => {
+    const isTableThere = document.getElementsByTagName("thead");
+    expect(isTableThere.length).toBe(1);
   });
 });

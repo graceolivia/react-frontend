@@ -8,51 +8,46 @@ function AstronautsTable() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-      fetchJson()
-      .then(
-        (data) => {
-          setAstronauts(data);
-          setIsLoaded(true);
-        },
-        (error) => {
+    fetchJson().then(
+      (data) => {
+        setAstronauts(data);
+        setIsLoaded(true);
+      },
+      (error) => {
         setError(error);
-        setIsLoaded(true)
-        }
-      );
+        setIsLoaded(true);
+      }
+    );
   }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
-} else if (!isLoaded) {
+  } else if (!isLoaded) {
     return <div>Loading, please wait...</div>;
-} else {
-    console.log(astronauts.people);
-    const DisplayData=astronauts.people.map(
-        (info)=>{
-            return(
-                <tr>
-                    <td>{info.craft}</td>
-                    <td>{info.name}</td>
-                </tr>
-            )
-        }
-    )
+  } else {
+    const astronautRow = astronauts.people.map((astronaut) => {
+      return (
+        <tr>
+          <td>{astronaut.craft}</td>
+          <td>{astronaut.name}</td>
+        </tr>
+      );
+    });
 
-  return (
-    <div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Craft</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>{ DisplayData }</tbody>
-      </table>
-    </div>
-  );
+    return (
+      <div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Craft</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>{astronautRow}</tbody>
+        </table>
+      </div>
+    );
   }
-
 }
 
 export default AstronautsTable;
