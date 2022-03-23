@@ -9,13 +9,6 @@ function App() {
         <h1>Astronauts in Space Now</h1>
         <img src="astronauts.webp" className="Astronaut" alt="logo" />
         <AstronautsTable />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="datatable"
-        ></a>
       </header>
     </div>
   );
