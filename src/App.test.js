@@ -48,3 +48,4 @@ test('table header is rendered', async () => {
     expect(isTableThere.length).toBe(1);
   });
 });
+

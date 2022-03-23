@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
+import { convertJsonToAstronauts } from "./astronaut";
+
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
@@ -10,7 +12,8 @@ function AstronautsTable() {
   useEffect(() => {
     fetchJson().then(
       (data) => {
-        setAstronauts(data);
+        const astronautArray = convertJsonToAstronauts(data);
+        setAstronauts(astronautArray);
         setIsLoaded(true);
       },
       (error) => {
@@ -20,12 +23,14 @@ function AstronautsTable() {
     );
   }, []);
 
+  // new hook with user button to see sorted state
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading, please wait...</div>;
   } else {
-    const astronautRow = astronauts.people.map((astronaut) => {
+    const astronautRow = astronauts.map((astronaut) => {
       return (
         <tr>
           <td>{astronaut.craft}</td>
@@ -36,11 +41,19 @@ function AstronautsTable() {
 
     return (
       <div>
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead>
             <tr>
-              <th>Craft</th>
-              <th>Name</th>
+              <th>
+                  Craft
+                  <br />
+                <div> [sort]</div>
+              </th>
+              <th>Name
+              <br />
+                <div> [sort]</div>
+              </th>
+
             </tr>
           </thead>
           <tbody>{astronautRow}</tbody>
