@@ -11,26 +11,19 @@ function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const sortTableRowsByCraft = () => {
-    console.log("CRAFT CALLED");
-    const sortedAstronauts = sortByAstronautCraft(astronauts);
-    console.log(sortedAstronauts);
-    return setAstronauts(sortedAstronauts);
-  };
-
-  const sortTableRowsByName = () => {
-    console.log("NAME CALLED");
-    const sortedAstronauts = sortByAstronautName(astronauts);
-    console.log(sortedAstronauts);
-    return setAstronauts(sortedAstronauts);
-  };
+  const [nameSet, setByName] = useState(false);
+  //   const [craftSet, setByCraft] = useState(false);
 
   useEffect(() => {
     fetchJson().then(
       (data) => {
         const astronautArray = convertJsonToAstronauts(data);
         setAstronauts(astronautArray);
+        if (nameSet === true) {
+          const sortedAstronauts = sortByAstronautName(astronauts);
+          console.log(sortedAstronauts);
+          setAstronauts(sortedAstronauts);
+        }
         setIsLoaded(true);
       },
       (error) => {
@@ -62,12 +55,12 @@ function AstronautsTable() {
               <th>
                 Craft
                 <br />
-                <button onClick={() => sortTableRowsByCraft()}>sort</button>
+                {/* <button onClick={() => sortByCraft(true)}>sort</button> */}
               </th>
               <th>
                 Name
                 <br />
-                <button onClick={() => sortTableRowsByName()}>sort</button>
+                <button onClick={() => setByName(true)}>sort</button>
               </th>
             </tr>
           </thead>
