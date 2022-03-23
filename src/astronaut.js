@@ -1,5 +1,3 @@
-import AstronautsTable from "./AstronautsTable";
-
 function Astronaut(craft, name) {
     this.craft = craft;
     this.name = name;

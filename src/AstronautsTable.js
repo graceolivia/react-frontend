@@ -1,13 +1,30 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
-import { convertJsonToAstronauts } from "./astronaut";
-
+import {
+  convertJsonToAstronauts,
+  sortByAstronautCraft,
+  sortByAstronautName,
+} from "./astronaut";
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const sortTableRowsByCraft = () => {
+    console.log("CRAFT CALLED");
+    const sortedAstronauts = sortByAstronautCraft(astronauts);
+    console.log(sortedAstronauts);
+    return setAstronauts(sortedAstronauts);
+  };
+
+  const sortTableRowsByName = () => {
+    console.log("NAME CALLED");
+    const sortedAstronauts = sortByAstronautName(astronauts);
+    console.log(sortedAstronauts);
+    return setAstronauts(sortedAstronauts);
+  };
 
   useEffect(() => {
     fetchJson().then(
@@ -22,8 +39,6 @@ function AstronautsTable() {
       }
     );
   }, []);
-
-  // new hook with user button to see sorted state
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -45,15 +60,15 @@ function AstronautsTable() {
           <thead>
             <tr>
               <th>
-                  Craft
-                  <br />
-                <div> [sort]</div>
+                Craft
+                <br />
+                <button onClick={() => sortTableRowsByCraft()}>sort</button>
               </th>
-              <th>Name
-              <br />
-                <div> [sort]</div>
+              <th>
+                Name
+                <br />
+                <button onClick={() => sortTableRowsByName()}>sort</button>
               </th>
-
             </tr>
           </thead>
           <tbody>{astronautRow}</tbody>
