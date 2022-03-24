@@ -2,18 +2,14 @@ import React from "react";
 import sortBy from "lodash/sortBy";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
-import {
-  convertJsonToAstronauts,
-  sortByAstronautCraft,
-  sortByAstronautName,
-} from "./astronaut";
+import { convertJsonToAstronauts } from "./astronaut";
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const setIsOpen = useEffect(() => {
+  useEffect(() => {
     fetchJson().then(
       (data) => {
         const astronautArray = convertJsonToAstronauts(data);
