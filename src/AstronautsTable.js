@@ -11,19 +11,14 @@ function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [nameSet, setByName] = useState(false);
-  //   const [craftSet, setByCraft] = useState(false);
+  const [nameAlphabeticalOrder, setNameAlphabeticalOrder] = useState(false);
+  const [craftSet, setByCraft] = useState(false);
 
-  useEffect(() => {
+  const setIsOpen = useEffect(() => {
     fetchJson().then(
       (data) => {
         const astronautArray = convertJsonToAstronauts(data);
         setAstronauts(astronautArray);
-        if (nameSet === true) {
-          const sortedAstronauts = sortByAstronautName(astronauts);
-          console.log(sortedAstronauts);
-          setAstronauts(sortedAstronauts);
-        }
         setIsLoaded(true);
       },
       (error) => {
@@ -32,6 +27,30 @@ function AstronautsTable() {
       }
     );
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("click", sortByNameAlphabeticallyButton);
+  });
+
+  //   useEffect(() => {
+  //     if (nameAlphabeticalOrder) {
+  //       const astronautArray = sortByAstronautName(astronauts);
+  //       setAstronauts(astronautArray);
+  //       console.log(astronautArray);
+  //     } else {
+  //       console.log("whee");
+  //     }
+  //   });
+
+  useEffect(() => {
+    if (nameAlphabeticalOrder) {
+      const astronautArray = sortByAstronautName(astronauts);
+      setAstronauts(astronautArray);
+      console.log(astronautArray);
+    } else {
+      console.log("whee");
+    }
+  });
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -55,12 +74,15 @@ function AstronautsTable() {
               <th>
                 Craft
                 <br />
-                {/* <button onClick={() => sortByCraft(true)}>sort</button> */}
+                {/* <button onClick={() => setByCraft(true)}>sort</button> */}
+                <button onClick={() => setByCraft(true)}>sort</button>
               </th>
               <th>
                 Name
                 <br />
-                <button onClick={() => setByName(true)}>sort</button>
+                <button className="sortByNameAlphabeticallyButton">
+                  sort By Name
+                </button>
               </th>
             </tr>
           </thead>
