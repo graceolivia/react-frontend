@@ -12,6 +12,7 @@ function AstronautsTable() {
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [craftOrder, orderByCraft] = useState(false);
+  const [nameOrder, orderByName] = useState(false);
 
   const setIsOpen = useEffect(() => {
     fetchJson().then(
@@ -33,6 +34,16 @@ function AstronautsTable() {
       setAstronauts(sortedAstronauts);
     } else {
       const sortedAstronauts = sortByAstronautCraft(astronauts).reverse();
+      setAstronauts(sortedAstronauts);
+    }
+  });
+
+  useEffect(() => {
+    if (nameOrder === true) {
+      const sortedAstronauts = sortByAstronautName(astronauts);
+      setAstronauts(sortedAstronauts);
+    } else {
+      const sortedAstronauts = sortByAstronautName(astronauts).reverse();
       setAstronauts(sortedAstronauts);
     }
   });
@@ -64,6 +75,7 @@ function AstronautsTable() {
               <th>
                 Name
                 <br />
+                <button onClick={() => orderByName(!nameOrder)}>sort</button>
               </th>
             </tr>
           </thead>
