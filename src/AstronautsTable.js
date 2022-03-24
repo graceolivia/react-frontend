@@ -1,4 +1,5 @@
 import React from "react";
+import sortBy from "lodash/sortBy";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
 import {
@@ -28,15 +29,19 @@ function AstronautsTable() {
 
   function reorderAstronautsByCraft() {
     console.log("click craft");
-    const reorderedAstronauts = sortByAstronautCraft(astronauts);
-    setAstronauts(reorderedAstronauts);
+    setAstronauts((astronauts) => {
+      return sortBy(astronauts, (astronaut) => astronaut.craft);
+    });
+    console.log(astronauts);
     console.log("done");
   }
 
   function reorderAstronautsByName() {
     console.log("click name");
-    const reorderedAstronauts = sortByAstronautName(astronauts);
-    setAstronauts(reorderedAstronauts);
+    setAstronauts((astronauts) => {
+      return sortBy(astronauts, (astronaut) => astronaut.name);
+    });
+    console.log(astronauts);
     console.log("done");
   }
 
@@ -47,7 +52,7 @@ function AstronautsTable() {
   } else {
     const astronautRow = astronauts.map((astronaut) => {
       return (
-        <tr>
+        <tr key={astronaut.name}>
           <td>{astronaut.craft}</td>
           <td>{astronaut.name}</td>
         </tr>
@@ -62,12 +67,12 @@ function AstronautsTable() {
               <th>
                 Craft
                 <br />
-                <button onClick={() => reorderAstronautsByCraft()}>sort</button>
+                <button onClick={reorderAstronautsByCraft}>sort</button>
               </th>
               <th>
                 Name
                 <br />
-                <button onClick={() => reorderAstronautsByName()}>sort</button>
+                <button onClick={reorderAstronautsByName}>sort</button>
               </th>
             </tr>
           </thead>
