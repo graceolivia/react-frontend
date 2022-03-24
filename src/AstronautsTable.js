@@ -11,8 +11,6 @@ function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [craftOrder, orderByCraft] = useState(false);
-  const [nameOrder, orderByName] = useState(false);
 
   const setIsOpen = useEffect(() => {
     fetchJson().then(
@@ -28,25 +26,19 @@ function AstronautsTable() {
     );
   }, []);
 
-  useEffect(() => {
-    if (craftOrder === true) {
-      const sortedAstronauts = sortByAstronautCraft(astronauts);
-      setAstronauts(sortedAstronauts);
-    } else {
-      const sortedAstronauts = sortByAstronautCraft(astronauts).reverse();
-      setAstronauts(sortedAstronauts);
-    }
-  });
+  function reorderAstronautsByCraft() {
+    console.log("click craft");
+    const reorderedAstronauts = sortByAstronautCraft(astronauts);
+    setAstronauts(reorderedAstronauts);
+    console.log("done");
+  }
 
-  useEffect(() => {
-    if (nameOrder === true) {
-      const sortedAstronauts = sortByAstronautName(astronauts);
-      setAstronauts(sortedAstronauts);
-    } else {
-      const sortedAstronauts = sortByAstronautName(astronauts).reverse();
-      setAstronauts(sortedAstronauts);
-    }
-  });
+  function reorderAstronautsByName() {
+    console.log("click name");
+    const reorderedAstronauts = sortByAstronautName(astronauts);
+    setAstronauts(reorderedAstronauts);
+    console.log("done");
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -70,12 +62,12 @@ function AstronautsTable() {
               <th>
                 Craft
                 <br />
-                <button onClick={() => orderByCraft(!craftOrder)}>sort</button>
+                <button onClick={() => reorderAstronautsByCraft()}>sort</button>
               </th>
               <th>
                 Name
                 <br />
-                <button onClick={() => orderByName(!nameOrder)}>sort</button>
+                <button onClick={() => reorderAstronautsByName()}>sort</button>
               </th>
             </tr>
           </thead>
