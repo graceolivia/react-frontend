@@ -11,8 +11,7 @@ function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [nameAlphabeticalOrder, setNameAlphabeticalOrder] = useState(false);
-  const [craftSet, setByCraft] = useState(false);
+  const [craftOrder, orderByCraft] = useState(false);
 
   const setIsOpen = useEffect(() => {
     fetchJson().then(
@@ -29,26 +28,12 @@ function AstronautsTable() {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("click", sortByNameAlphabeticallyButton);
-  });
-
-  //   useEffect(() => {
-  //     if (nameAlphabeticalOrder) {
-  //       const astronautArray = sortByAstronautName(astronauts);
-  //       setAstronauts(astronautArray);
-  //       console.log(astronautArray);
-  //     } else {
-  //       console.log("whee");
-  //     }
-  //   });
-
-  useEffect(() => {
-    if (nameAlphabeticalOrder) {
-      const astronautArray = sortByAstronautName(astronauts);
-      setAstronauts(astronautArray);
-      console.log(astronautArray);
+    if (craftOrder === true) {
+      const sortedAstronauts = sortByAstronautCraft(astronauts);
+      setAstronauts(sortedAstronauts);
     } else {
-      console.log("whee");
+      const sortedAstronauts = sortByAstronautCraft(astronauts).reverse();
+      setAstronauts(sortedAstronauts);
     }
   });
 
@@ -74,15 +59,11 @@ function AstronautsTable() {
               <th>
                 Craft
                 <br />
-                {/* <button onClick={() => setByCraft(true)}>sort</button> */}
-                <button onClick={() => setByCraft(true)}>sort</button>
+                <button onClick={() => orderByCraft(!craftOrder)}>sort</button>
               </th>
               <th>
                 Name
                 <br />
-                <button className="sortByNameAlphabeticallyButton">
-                  sort By Name
-                </button>
               </th>
             </tr>
           </thead>
