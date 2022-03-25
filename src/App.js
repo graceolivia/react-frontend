@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import AstronautsTable from "./AstronautsTable";
+import { useState, useEffect } from "react";
 
 function App() {
   return (
