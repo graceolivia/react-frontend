@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
 import HeaderComponent from "./HeaderComponent";
-import AstronautRow from "./AstronautRow";
+import AstronautRows from "./AstronautRows";
 import TableHead from "./TableHead";
 
 function AstronautsTable(props) {
@@ -36,7 +36,7 @@ function AstronautsTable(props) {
     return <div>Loading, please wait...</div>;
   } else {
     const astronautRow = astronauts.people.map((a) => {
-      return <AstronautRow name={a.name} craft={a.craft} />;
+      return <AstronautRows name={a.name} craft={a.craft} />;
     });
 
     return (

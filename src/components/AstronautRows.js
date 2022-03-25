@@ -1,4 +1,4 @@
-function AstronautRow(props) {
+function AstronautRows(props) {
   return (
     <tr>
       <td>{props.craft}</td>
@@ -7,4 +7,4 @@ function AstronautRow(props) {
   );
 }
 
-export default AstronautRow;
+export default AstronautRows;

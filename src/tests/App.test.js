@@ -1,7 +1,8 @@
+import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-import App from "./App";
+import App from "../App";
 import React from "react";
-import * as fetchJson from "./fetchJson";
+import * as fetchJson from "../components/fetchJson";
 
 test("renders loading screen", () => {
   render(<App />);
