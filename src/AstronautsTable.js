@@ -2,12 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
 import HeaderComponent from "./HeaderComponent";
+import AstronautRow from "./AstronautRow";
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [setAstroNumber, numberOfAstros] = useState(0);
 
   useEffect(() => {
     fetchJson().then(
@@ -34,13 +34,8 @@ function AstronautsTable() {
   } else if (!isLoaded) {
     return <div>Loading, please wait...</div>;
   } else {
-    const astronautRow = astronauts.people.map((astronaut) => {
-      return (
-        <tr>
-          <td>{astronaut.craft}</td>
-          <td>{astronaut.name}</td>
-        </tr>
-      );
+    const astronautRow = astronauts.people.map((a) => {
+      return <AstronautRow name={a.name} craft={a.craft} />;
     });
 
     return (
