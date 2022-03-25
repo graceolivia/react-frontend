@@ -3,7 +3,7 @@ import App from "./App";
 import React from "react";
 import * as fetchJson from "./fetchJson";
 
-configure({ asyncUtilTimeout: 5000 });
+configure({ asyncUtilTimeout: 100000 });
 
 test("renders loading screen", () => {
   render(<App />);
