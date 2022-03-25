@@ -5,7 +5,7 @@ import HeaderComponent from "./HeaderComponent";
 import AstronautRow from "./AstronautRow";
 import TableHead from "./TableHead";
 
-function AstronautsTable() {
+function AstronautsTable(props) {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
