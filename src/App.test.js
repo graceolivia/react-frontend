@@ -3,6 +3,8 @@ import App from "./App";
 import React from "react";
 import * as fetchJson from "./fetchJson";
 
+configure({ asyncUtilTimeout: 5000 });
+
 test("renders loading screen", () => {
   render(<App />);
   const loadingText = screen.getByText(/Loading/i);
