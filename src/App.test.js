@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, configure } from "@testing-library/react";
 import App from "./App";
 import React from "react";
 import * as fetchJson from "./fetchJson";
