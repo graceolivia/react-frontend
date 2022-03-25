@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
+import HeaderComponent from "./HeaderComponent";
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [setAstroNumber, numberOfAstros] = useState(0);
 
   useEffect(() => {
     fetchJson().then(
@@ -43,6 +45,7 @@ function AstronautsTable() {
 
     return (
       <div>
+        <HeaderComponent number="10" />
         <table class="table table-striped">
           <thead>
             <tr>
