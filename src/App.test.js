@@ -45,9 +45,9 @@ test("table header is rendered", async () => {
   const jsonPromise = Promise.resolve(jsonObject);
   const spy = jest.spyOn(fetchJson, "default").mockResolvedValue(jsonPromise);
 
-  render(<App />);
-  expect(spy).toHaveBeenCalled();
   await waitFor(() => {
+    render(<App />);
+    expect(spy).toHaveBeenCalled();
     const isTableThere = document.getElementsByTagName("thead");
     expect(isTableThere.length).toBe(1);
   });
