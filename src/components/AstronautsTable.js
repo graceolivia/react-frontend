@@ -5,7 +5,7 @@ import HeaderComponent from "./HeaderComponent";
 import AstronautRows from "./AstronautRows";
 import TableHead from "./TableHead";
 
-function AstronautsTable(props) {
+function AstronautsTable() {
   const [error, setError] = useState(null);
   const [astronauts, setAstronauts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,9 +39,12 @@ function AstronautsTable(props) {
       return <AstronautRows name={a.name} craft={a.craft} />;
     });
 
+    const astronautNumber = astronauts.people.length.toString();
+
     return (
       <div>
-        <HeaderComponent number="10" />
+        {/* <HeaderComponent number="10" /> */}
+        <HeaderComponent number={astronautNumber} />
         <table class="table table-striped">
           <TableHead />
           <tbody>{astronautRow}</tbody>

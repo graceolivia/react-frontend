@@ -1,8 +1,9 @@
 function AstronautRows(props) {
+  const { craft, name } = props;
   return (
     <tr>
-      <td>{props.craft}</td>
-      <td>{props.name}</td>
+      <td>{craft}</td>
+      <td>{name}</td>
     </tr>
   );
 }
