@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import fetchJson from "./fetchJson";
 import HeaderComponent from "./HeaderComponent";
 import AstronautRow from "./AstronautRow";
+import TableHead from "./TableHead";
 
 function AstronautsTable() {
   const [error, setError] = useState(null);
@@ -42,12 +43,7 @@ function AstronautsTable() {
       <div>
         <HeaderComponent number="10" />
         <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Craft</th>
-              <th>Name</th>
-            </tr>
-          </thead>
+          <TableHead />
           <tbody>{astronautRow}</tbody>
         </table>
       </div>

@@ -9,10 +9,12 @@ test("renders loading screen", () => {
   expect(loadingText).toBeInTheDocument();
 });
 
-test("renders graphic", () => {
+test("renders graphic", async () => {
   render(<App />);
-  const isGraphicThere = document.getElementsByClassName("Astronaut");
-  expect(isGraphicThere.length).toBe(1);
+  await waitFor(() => {
+    const isGraphicThere = document.getElementsByClassName("Astronaut");
+    expect(isGraphicThere.length).toBe(1);
+  });
 });
 
 test("fetchJson gets called", () => {
